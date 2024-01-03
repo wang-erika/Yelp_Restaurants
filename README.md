@@ -1,4 +1,4 @@
-# CS216 Project
+# Yelp Restaurants
 
 
 
