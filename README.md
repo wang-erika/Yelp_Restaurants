@@ -2,91 +2,23 @@
 
 
 
-## Getting started
+## Introduction and Research Questions 
+Focusing on the top 5 cuisines in the US (Indian, Thai, Mexican, Italian, and Chinese), we want to learn if there are differences in the way people review and interact with restaurants of these varying types. For one facet of our research, we want to explore in general what makes a restaurant good or bad (we define good or bad by the rating Yelp provides) within their respective cuisines by looking at factors such as noise level, free wifi, hours, and other amenities. Then, we want to compare how these trends differ throughout these cuisines and also find out more about how customers rate and review these businesses differently throughout urban areas in the United States. The United States is known to be a “melting pot” of people, cultures, and experiences. Diversity of cuisine is one of our nation's most widely shared aspects, and the vast number of ethnic and cultural foods available directly show that. While we celebrate that diversity, we also want to look at how underlying attitudes and biases may account for differences in how these different ethnic businesses are treated and perceived. That is the basis for our research - we aim to use quantitative data such as ratings as well as other techniques, such as natural language processing, to pinpoint some of these key differences. These research questions are relevant because we want to find out if there are significant differences in the way these types of restaurants operate and are interacted with by customers. Ethnic foods are intrinsically tied to social and cultural identity, so we hope to determine what factors are most important to customers of these cuisines and how these factors differ among them. 
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Data Sources 
+The primary dataset we’ll be using is the Yelp academic dataset. With more than 6 million reviews and 150,000 businesses, the Yelp dataset is a significant subset of Yelp’s user, business, and review data made public for academic purposes. The link to access this data set is here: https://www.yelp.com/dataset. We expected to be successful with this dataset because it provides the locations of restaurants, names of restaurants, Yelp users, reviews, ratings, and other columns that we can use to answer our questions. The data is relevant and appropriate since it provides not only binary or numeric data such as rating, longitude/latitude, and is_open but also a string of user-written reviews and tips. The reviews make it so we can run analyses like natural language processing on them. Each file is composed of a single object type, one JSON object per line. It contains business, review, user, check-in, tip, and photo JSON files, so we will easily be able to access information about a certain business’s details, ratings, and location, all factors we will need in conducting our research. Because the dataset is relatively large ( > 4 GB) for the tools we have learned to use in class, we split the dataset into sections to analyze. In particular, our project focused on the business and reviews CSV, as they contained pertinent information about businesses’ ratings, the categories (types of cuisines, etc.), their city, and state. 
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Limitations
+Despite the Yelp dataset’s vastness and robust documentation, we still encountered several limitations while working with the data. As mentioned earlier, there were substantially lower instances of “Indian” restaurants in the dataset for some reason. This was unexpected given the popularity of Indian cuisine in the US and the fact that most of the data was centered around businesses in urban areas. 
+Another difficulty was that the categorization of cuisines wasn’t smooth as many specific cuisines were generalized into bigger categories (e.g., Thai and Chinese cuisines were categorized as “Asian cuisine”). This made it a bit more difficult to analyze more specific cuisines. Another limitation within the dataset was with the business_id, where a significant amount of businesses had a business ID of ‘#NAME?’ (essentially NaN value). As a result, we removed these from the dataset, which significantly reduced its size. 
+Another limitation was that there were so many different attributes (wifi, hours, parking, delivery, reservations, air conditioning, etc.) that may contribute to a difference in ratings, but due to the inconsistency in the dataset (some businesses would fill out some attributes, others not), we were only able to look into a few of them, so we could only determine correlation, and not a very strong correlation, because we are unsure of confounding variables. 
+Lastly, as mentioned previously, since the dataset was so large, working with it entirely made the code keep crashing and difficult to manage. Since we limited the dataset to just food trucks for the TF-IDF (so the code would run), we could not analyze all of the desired examples since some indices were out of bounds. 
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Future Work
+For our future work, we could take a look at time as a factor and see if there are differences between cuisines. Another future work we can work on is finding a way to analyze all of the reviews using the TF-IDF technique and modifying our recommendation system to have the person input their desired state, type of restaurant, and popularity based on a number of reviews in order to provide a more detailed and precise recommendation system.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.oit.duke.edu/ew184/cs216-project.git
-git branch -M main
-git push -uf origin main
-```
+## Conclusion
+As we aggregated the data from the Yelp dataset’s reviews and business files, we did not find many differences between the cuisines in our polarity analysis and mean star ratings. A few interesting findings from our analysis, however, were that certain cuisines differed in certain areas, such as in ratings vs. noise levels for Italian restaurants and delivery service vs. ratings for Indian restaurants. There were also differences in cuisine vs. proportion of 1-5 star ratings (Italian restaurants had the highest proportion of 5-star ratings than others) and different words used to review the different cuisines (“Pizza” was only used for Italian restaurants).  
+Some other interesting findings that relate to our question of what influences how ‘good’ a restaurant is was that the demographics of the city were a better predictor of higher ratings for ethnic cuisines than the size of the city. Our recommendation system also dives into how customers interact with different restaurants, and in the future, we could possibly tailor this to different cuisines as well.
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.oit.duke.edu/ew184/cs216-project/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
